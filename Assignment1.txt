@@ -1,0 +1,89 @@
+create tables
+
+-- Customer Table
+Create Table Customer (id int PRIMARY KEY, FirstName nvarchar(40),LastName nvarchar(40),City nvarchar(40), Country nvarchar(40),Phone nvarchar(20));
+
+-- Orders Table
+CREATE TABLE Orders (id int PRIMARY KEY, OrderDate DATETIME, OrderNumber nvarchar(10), CustomerId int, TotalAmount decimal(12,2))
+
+-- Product Table
+create table Product(id int PRIMARY KEY, ProductName nvarchar(50), UnitPrice decimal(12,2), Package nvarchar(30), IsDiscountinued bit);
+
+
+-- OrderItem Table
+create table OrderItem(id int PRIMARY KEY, OrderId int, ProductId int, UnitPrice decimal(12,2), Quantity int);
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--Adding Primary & Foreign Key
+ALTER TABLE Orderitem
+ADD FOREIGN KEY(ProductId) REFERENCES Product(id);
+
+ALTER TABLE Orderitem
+ADD FOREIGN KEY(ProductId) REFERENCES Product(id);
+
+ALTER TABLE Orders
+ADD FOREIGN KEY(CustomerId) REFERENCES Customer(id);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- 2.Insert Records in all tables 
+INSERT INTO PRODUCT(id, ProductName, UnitPrice, Package, isDiscontinued) VALUES(1, 'Bag', 2500.00, 'yes', 0);
+INSERT INTO PRODUCT(id, ProductName, UnitPrice, Package, isDiscontinued) VALUES(2, 'Jar', 3500.00, 'no', 1);
+INSERT INTO PRODUCT(id, ProductName, UnitPrice, Package, isDiscontinued) VALUES(3, 'Teaspoon', 500.00, 'no', 0);
+INSERT INTO PRODUCT(id, ProductName, UnitPrice, Package, isDiscontinued) VALUES(4, 'Car', 5000.00, 'yes', 1);
+INSERT INTO PRODUCT(id, ProductName, UnitPrice, Package, isDiscontinued) VALUES(5, 'book', 3400.00, 'yes', 0);
+
+------------------------------------------------------------------------------------------------------------------------
+INSERT into Orders(id, OrderDate, OrderNumber, CustomerId, TotalAmount) VALUES(101, 17-05-2022, 'OD571', 1, 2300.00);
+
+INSERT into Orders(id, OrderDate, OrderNumber, CustomerId, TotalAmount) VALUES(102, 17-05-2022, 'OD572', 2, 4500.00);
+INSERT into Orders(id, OrderDate, OrderNumber, CustomerId, TotalAmount) VALUES(103, 17-05-2022, 'OD573', 3, 5785.00);
+INSERT into Orders(id, OrderDate, OrderNumber, CustomerId, TotalAmount) VALUES(104, 17-05-2022, 'OD574', 4, 1473.00);
+INSERT into Orders(id, OrderDate, OrderNumber, CustomerId, TotalAmount) VALUES(105, 17-05-2022, 'OD575', 5, 6574.00);
+
+---------------------------------------------------------------------------------------------------------------------------
+
+Insert into OrderItem(id, OrderId, ProductId, UnitPrice, Quantity) VALUES (301, 101, 1, 
+2300.00, 2);
+Insert into OrderItem(id, OrderId, ProductId, UnitPrice, Quantity) VALUES (302, 102, 2, 
+4500.00, 6);
+Insert into OrderItem(id, OrderId, ProductId, UnitPrice, Quantity) VALUES (303, 103, 3, 
+5785.00, 4);
+Insert into OrderItem(id, OrderId, ProductId, UnitPrice, Quantity) VALUES (304, 104, 4, 
+4522.00, 10);
+Insert into OrderItem(id, OrderId, ProductId, UnitPrice, Quantity) VALUES (305, 105, 5, 
+8956.00, 15);
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO Customer (id, FirstName, LastName, City, Country, Phone) VALUES (1,'Sai', 'Ayina', 'Vijayawada', 'India', '7865489543')
+INSERT INTO Customer (id, FirstName, LastName, City, Country, Phone) VALUES (2, 'Chandini', 'Akula', 'mumbai', 'India', '8643765896')
+INSERT INTO Customer (id, FirstName, LastName, City, Country, Phone) VALUES (3,'Karthik', 'uppalapu', 'America', 'USA', '2576497694')
+INSERT INTO Customer (id, FirstName, LastName, City, Country, Phone) VALUES (4,'Jyothi', 'Gundi', 'Karnataka', 'India', '2375298703')
+INSERT INTO Customer (id, FirstName, LastName, City, Country, Phone) VALUES (5,'Prasad', 'Peket', 'Sarland', 'Germany', '9985543289')
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+-- 4.In Order table OrderDate should not accept null value
+ALTER TABLE Customer 
+ALTER Column FirstName nvarchar(40) NOT NULL;
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+-- 5.Display all customer details
+ALTER TABLE Orders
+ALTER COLUMN OrderDate datetime NOT NULL;
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+-- 6.write a query to display Country whose name starts with A or I
+
+Select * from Customer WHERE Country LIKE 'i%' or Country LIKE 'a%'
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+-- 7 .write a query to display whose name of customer whose third character is i
+
+Select * from Customer WHERE FirstName LIKE '__i%'
